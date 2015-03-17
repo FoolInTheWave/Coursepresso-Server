@@ -23,7 +23,7 @@ public class SecurityServiceImpl implements SecurityService {
   public void login(String username, String password) {
     // Never log password information!
     log.info("Logging in user '{}'", username);
-    
+
     UsernamePasswordAuthenticationToken authToken
         = new UsernamePasswordAuthenticationToken(username, password);
 
@@ -32,9 +32,24 @@ public class SecurityServiceImpl implements SecurityService {
     );
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
+
     log.debug("User '{}' successfully logged in with authorities: '{}'",
         username,
         authentication.getAuthorities()
+    );
+  }
+
+  @Override
+  public void logout() {
+    Authentication authentication = SecurityContextHolder.getContext()
+        .getAuthentication();
+
+    log.info("Logging out user '{}'", authentication.getName());
+
+    SecurityContextHolder.getContext().setAuthentication(null);
+
+    log.debug("User '{}' successfully logged out",
+        authentication.getName()
     );
   }
 }
