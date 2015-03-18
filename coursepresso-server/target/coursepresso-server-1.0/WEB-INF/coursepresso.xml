@@ -54,9 +54,14 @@
   </bean>
 
   <!-- Security Configuration -->
-  <security:http create-session="always">
+  <security:http auto-config='true' create-session="always" >
     <security:http-basic/>
+    <intercept-url pattern="/**" requires-channel="https" />    
   </security:http>
+  
+<!--  <security:http create-session="always">
+    <security:http-basic/>
+  </security:http>-->
 
   <security:global-method-security pre-post-annotations="enabled"/>
 

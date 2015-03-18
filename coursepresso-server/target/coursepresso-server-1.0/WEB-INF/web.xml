@@ -9,6 +9,11 @@
     <param-value>/WEB-INF/coursepresso.xml</param-value>
 </context-param>
 
+<!--
+Use SSL for connections to Tomcat
+http://www.captaindebug.com/2012/12/securing-your-tomcat-app-with-ssl-and.html#.VQYQGuGzmxY
+-->
+
 <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 </listener>
