@@ -46,7 +46,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     log.info("Logging out user '{}'", authentication.getName());
 
-    SecurityContextHolder.getContext().setAuthentication(null);
+    SecurityContextHolder.clearContext();
 
     log.debug("User '{}' successfully logged out",
         authentication.getName()
