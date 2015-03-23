@@ -1,6 +1,7 @@
 package com.coursepresso.project.service;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,8 @@ public class SecurityServiceImpl implements SecurityService {
 
   @Inject
   private AuthenticationManager authenticationManager;
+  @Inject
+  private HttpServletRequest request;
 
   @Override
   public void login(String username, String password) {
@@ -47,6 +50,9 @@ public class SecurityServiceImpl implements SecurityService {
     log.info("Logging out user '{}'", authentication.getName());
 
     SecurityContextHolder.clearContext();
+
+    // Clear HTTP session
+    request.getSession().invalidate();
 
     log.debug("User '{}' successfully logged out",
         authentication.getName()
