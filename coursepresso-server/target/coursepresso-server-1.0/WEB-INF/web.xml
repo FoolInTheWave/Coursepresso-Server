@@ -4,38 +4,144 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-<context-param>
+  <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/coursepresso.xml</param-value>
-</context-param>
+  </context-param>
 
-<!--
-Use SSL for connections to Tomcat
-http://www.captaindebug.com/2012/12/securing-your-tomcat-app-with-ssl-and.html#.VQYQGuGzmxY
--->
-
-<listener>
+  <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-</listener>
+  </listener>
 
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
-    <servlet>
-        <servlet-name>coursepresso</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>security</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>appliance</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>course-prerequisite</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>course</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>course-section</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>department</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>6</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>meeting-day</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>7</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>meeting-time</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>8</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>professor</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>9</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>room</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>10</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>term</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>11</load-on-startup>
+  </servlet>
 
-    <servlet-mapping>
-        <servlet-name>coursepresso</servlet-name>
-        <url-pattern>*.service</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>security</servlet-name>
+    <url-pattern>/security.service/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>appliance</servlet-name>
+    <url-pattern>/appliance.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>course-prerequisite</servlet-name>
+    <url-pattern>/course-prerequisite.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>course</servlet-name>
+    <url-pattern>/course.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>course-section</servlet-name>
+    <url-pattern>/course-section.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>department</servlet-name>
+    <url-pattern>/department.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>meeting-day</servlet-name>
+    <url-pattern>/meeting-day.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>meeting-time</servlet-name>
+    <url-pattern>/meeting-time.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>professor</servlet-name>
+    <url-pattern>/professor.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>room</servlet-name>
+    <url-pattern>/room.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>term</servlet-name>
+    <url-pattern>/term.repository/*</url-pattern>
+  </servlet-mapping>
 
 </web-app>
