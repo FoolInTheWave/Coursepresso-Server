@@ -88,6 +88,12 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>11</load-on-startup>
   </servlet>
+  
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>12</load-on-startup>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>security</servlet-name>
@@ -142,6 +148,11 @@
   <servlet-mapping>
     <servlet-name>term</servlet-name>
     <url-pattern>/term.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search.service/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
