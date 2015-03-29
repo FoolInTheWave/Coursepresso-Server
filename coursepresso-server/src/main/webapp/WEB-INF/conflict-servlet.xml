@@ -4,10 +4,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                http://www.springframework.org/schema/beans/spring-beans.xsd">
-    
+
   <bean name="/conflict.service" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
     <property name="service" ref="conflictServiceImpl"/>
-    <property name="serviceInterface" value="com.coursepresso.project.service.ConflictServiceImpl"/>
+    <property name="serviceInterface" value="com.coursepresso.project.service.ConflictService"/>
   </bean>
 
 </beans>

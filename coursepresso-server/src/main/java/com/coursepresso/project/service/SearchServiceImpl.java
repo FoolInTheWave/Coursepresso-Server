@@ -122,6 +122,8 @@ public class SearchServiceImpl implements SearchService {
       cq.select(section).where(andClause).distinct(true);
     }
     
+    log.debug(cq.toString());
+    
     List<CourseSection> results = entityManager.createQuery(cq).getResultList();
     
     log.debug(results.toString());
