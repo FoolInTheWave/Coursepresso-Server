@@ -7,7 +7,7 @@
     
   <bean name="/conflict.service" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
     <property name="service" ref="conflictServiceImpl"/>
-    <property name="serviceInterface" value="com.coursepresso.project.service.ConflictServiceImpl/>
+    <property name="serviceInterface" value="com.coursepresso.project.service.ConflictServiceImpl"/>
   </bean>
 
 </beans>

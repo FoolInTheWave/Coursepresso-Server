@@ -52,10 +52,10 @@ public class SearchServiceImpl implements SearchService {
               (Term) params.get("term"))
       );
     }
-    if (params.containsKey("courseNumber")) {
+    if (params.containsKey("course")) {
       andClauses.add(cb.equal(
               section.get("courseNumber"),
-              (Course) params.get("courseNumber"))
+              (Course) params.get("course"))
       );
     }
     if (params.containsKey("professor")) {
@@ -122,7 +122,11 @@ public class SearchServiceImpl implements SearchService {
       cq.select(section).where(andClause).distinct(true);
     }
     
-    return entityManager.createQuery(cq).getResultList();
+    List<CourseSection> results = entityManager.createQuery(cq).getResultList();
+    
+    log.debug(results.toString());
+    
+    return results;
   }
   
 }
