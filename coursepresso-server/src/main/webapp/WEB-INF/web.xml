@@ -94,6 +94,12 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>12</load-on-startup>
   </servlet>
+  
+  <servlet>
+    <servlet-name>conflict</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>13</load-on-startup>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>security</servlet-name>
@@ -153,6 +159,11 @@
   <servlet-mapping>
     <servlet-name>search</servlet-name>
     <url-pattern>/search.service/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>conflict</servlet-name>
+    <url-pattern>/conflict.service/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
