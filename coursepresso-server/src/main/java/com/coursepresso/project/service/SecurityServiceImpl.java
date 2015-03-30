@@ -8,6 +8,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +21,8 @@ public class SecurityServiceImpl implements SecurityService {
 
   @Inject
   private AuthenticationManager authenticationManager;
+  @Inject
+  private JdbcUserDetailsManager jdbcUserDetailsManager;
   @Inject
   private HttpServletRequest request;
 
@@ -54,8 +58,16 @@ public class SecurityServiceImpl implements SecurityService {
     // Clear HTTP session
     request.getSession().invalidate();
 
-    log.debug("User '{}' successfully logged out",
-        authentication.getName()
-    );
+    log.debug("User '{}' successfully logged out", authentication.getName());
   }
+  
+  @Override
+  public void createUser(UserDetails user) {
+    log.info("Creating new user '{}'", user.getUsername());
+    
+    jdbcUserDetailsManager.createUser(user);
+    
+    log.debug("User '{}' successfully created", user.getUsername());
+  }
+  
 }
