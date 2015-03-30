@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Caleb Miller
+ * @author Caleb Miller, Steve Foco
  */
 @Service
 public class ConflictServiceImpl implements ConflictService {
@@ -48,9 +48,13 @@ public class ConflictServiceImpl implements ConflictService {
 
             if(!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
-              if((meetingDayToCompare.getStartTime().before(meetingDay.getEndTime())) && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+              if((meetingDayToCompare.getStartTime().before(meetingDay.getEndTime())) && 
+                 (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
-                conflicts.add(meetingDay.getCourseSectionId().toString() + "#" + meetingDayToCompare.getCourseSectionId().toString());
+                conflicts.add(
+                    meetingDay.getCourseSectionId().toString() + "#" + 
+                    meetingDayToCompare.getCourseSectionId().toString()
+                );
 
               }
             }
@@ -59,6 +63,6 @@ public class ConflictServiceImpl implements ConflictService {
       }
     }
     
-    return new ArrayList<String>(conflicts);
+    return new ArrayList<>(conflicts);
   }
 }
