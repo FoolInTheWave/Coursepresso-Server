@@ -38,7 +38,7 @@ public class ConflictServiceImpl implements ConflictService {
     rooms = roomRepository.getRoomsWithMeetingDays();
     
     for(Room room : rooms) {
-      if(room.getRoomNumber().equals("A105")) {
+      if(room.getRoomNumber().equals("A105") || room.getRoomNumber().equals("A102")) {
 
         meetingDays = room.getMeetingDayList();
         
