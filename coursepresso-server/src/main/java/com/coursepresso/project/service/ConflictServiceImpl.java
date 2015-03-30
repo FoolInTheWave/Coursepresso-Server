@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -17,39 +19,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConflictServiceImpl implements ConflictService {
   
+  private static final Logger log = LoggerFactory.getLogger(
+      SecurityServiceImpl.class
+  );
+    
   @Inject
   private RoomRepository roomRepository;
   
-  private static List<Room> rooms;
-  private static List<MeetingDay> meetingDays;
-  private static ArrayList conflicts;
+  private List<Room> rooms;
+  private List<MeetingDay> meetingDays;
+  private List<String> conflicts;
   
   @Override
   public List<String> getConflicts(Term term) {
     
-    rooms = roomRepository.getRoomsWithMeetingDays();
-    
-    for(Room room : rooms) {
-      meetingDays = room.getMeetingDayList();
-      
-      for(MeetingDay meetingDay : meetingDays) {
-        for(MeetingDay meetingDayToCompare : meetingDays) {
-          
-          if(!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
-            if(  
-              (meetingDay.getStartTime().before(meetingDayToCompare.getEndTime())) 
-              &&
-              (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))  
-            ) 
-            {
-              conflicts.add(meetingDay.getCourseSectionId().toString() + " " + meetingDayToCompare.getCourseSectionId().toString());
-            }
-          }
-        }
-      }
-    }
-    
+    conflicts.add("BLAH");
+   
     return conflicts;
   }
-  
 }
