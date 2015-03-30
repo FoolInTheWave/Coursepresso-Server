@@ -6,7 +6,6 @@ import com.coursepresso.project.entity.Term;
 import com.coursepresso.project.repository.RoomRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class ConflictServiceImpl implements ConflictService {
   
   private static final Logger log = LoggerFactory.getLogger(
-      SecurityServiceImpl.class
+      ConflictServiceImpl.class
   );
     
   @Inject
@@ -32,6 +31,8 @@ public class ConflictServiceImpl implements ConflictService {
   
   @Override
   public List<String> getConflicts(Term term) {
+    
+    conflicts = new ArrayList<>();
     
     conflicts.add("BLAH");
    
