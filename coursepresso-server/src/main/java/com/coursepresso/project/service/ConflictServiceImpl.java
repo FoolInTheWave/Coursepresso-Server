@@ -5,7 +5,10 @@ import com.coursepresso.project.entity.Room;
 import com.coursepresso.project.entity.Term;
 import com.coursepresso.project.repository.RoomRepository;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -25,17 +28,37 @@ public class ConflictServiceImpl implements ConflictService {
   @Inject
   private RoomRepository roomRepository;
   
-  private List<Room> rooms;
-  private List<MeetingDay> meetingDays;
-  private List<String> conflicts;
+  private List<Room> rooms = new ArrayList<>();;
+  private List<MeetingDay> meetingDays = new ArrayList<>();;
+  private Set<String> conflicts = new HashSet<>();
   
   @Override
   public List<String> getConflicts(Term term) {
+       
+    rooms = roomRepository.getRoomsWithMeetingDays();
     
-    conflicts = new ArrayList<>();
+    for(Room room : rooms) {
+      if(room.getRoomNumber().equals("A105")) {
+
+        meetingDays = room.getMeetingDayList();
+        
+        for(MeetingDay meetingDay : meetingDays) {
+                      
+          for(MeetingDay meetingDayToCompare : meetingDays) {
+
+            if(!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
+
+              if((meetingDayToCompare.getStartTime().before(meetingDay.getEndTime())) && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+
+                conflicts.add(meetingDay.getCourseSectionId().toString() + "." + meetingDayToCompare.getCourseSectionId().toString());
+
+              }
+            }
+          }
+        }
+      }
+    }
     
-    conflicts.add("BLAH");
-   
-    return conflicts;
+    return new ArrayList<String>(conflicts);
   }
 }
