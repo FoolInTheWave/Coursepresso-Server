@@ -48,7 +48,8 @@ public class ConflictServiceImpl implements ConflictService {
 
             if(!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
-              if((meetingDayToCompare.getStartTime().before(meetingDay.getEndTime())) && 
+              if((meetingDayToCompare.getDay().equals(meetingDay.getDay())) &&
+                 (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime())) && 
                  (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
                 conflicts.add(
