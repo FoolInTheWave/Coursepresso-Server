@@ -75,7 +75,7 @@ public class CourseSection implements Serializable {
     this.id = id;
   }
 
-  public CourseSection(Integer id, int sectionNumber, boolean available,
+  public CourseSection(int id, int sectionNumber, boolean available,
           int capacity, int seatsAvailable, String status, int studentCount,
           String type, Date startDate, Date endDate, Date updatedAt) {
     this.id = id;
