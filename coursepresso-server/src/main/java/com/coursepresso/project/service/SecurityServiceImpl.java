@@ -70,4 +70,12 @@ public class SecurityServiceImpl implements SecurityService {
     log.debug("User '{}' successfully created", user.getUsername());
   }
   
+  @Override
+  public String getAuthority() {
+    
+    return SecurityContextHolder.getContext().
+            getAuthentication().getAuthorities().toString();
+    
+  }
+  
 }
