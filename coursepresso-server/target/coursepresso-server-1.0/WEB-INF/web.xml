@@ -104,6 +104,18 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>13</load-on-startup>
   </servlet>
+  
+  <servlet>
+    <servlet-name>authority</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>14</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>user</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>15</load-on-startup>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>security</servlet-name>
@@ -168,6 +180,16 @@
   <servlet-mapping>
     <servlet-name>conflict</servlet-name>
     <url-pattern>/conflict.service/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>authority</servlet-name>
+    <url-pattern>/authority.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/user.repository/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
