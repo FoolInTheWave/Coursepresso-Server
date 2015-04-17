@@ -16,4 +16,13 @@ public interface RoomRepository extends CrudRepository<Room, String> {
   
   @Query("SELECT r FROM Room r JOIN FETCH r.meetingDayList")
   public List<Room> getRoomsWithMeetingDays();
+  
+  /**
+   * Custom FIND method retrieves a Department record from the database
+   * 
+   * @param room_number The room number to match.
+   * @return A Department record as a Department object.
+   */
+  @Query("SELECT r FROM Room r WHERE r.room_number = (:room_number)")
+  public Room findByRoomNumber(@Param("room_number") String room_number);
 }
