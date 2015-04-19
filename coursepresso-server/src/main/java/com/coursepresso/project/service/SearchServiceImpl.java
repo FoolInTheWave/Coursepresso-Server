@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -30,37 +31,37 @@ public class SearchServiceImpl implements SearchService {
   private EntityManager entityManager;
 
   @Override
+  @Transactional
   public List<CourseSection> searchSections(Map<String, Object> params) {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery cq = cb.createQuery();
     Root<CourseSection> section = cq.from(CourseSection.class);
-    //Join<CourseSection, MeetingDay> day = section.join("meetingDayList");
-    Join<CourseSection, Course> course = section.join("courseNumber");
+    Join<CourseSection, Course> course = section.join("course");
 
     List<Predicate> andClauses = new ArrayList<>();
     List<Predicate> orClauses = new ArrayList<>();
 
-    if (params.containsKey("department")) {
-      andClauses.add(cb.equal(
-          section.get("department"),
-          (Department) params.get("department"))
-      );
-    }
     if (params.containsKey("term")) {
       andClauses.add(cb.equal(
           section.get("term"),
           (Term) params.get("term"))
       );
     }
+    if (params.containsKey("department")) {
+      andClauses.add(cb.equal(
+          section.get("department"),
+          (Department) params.get("department"))
+      );
+    }
     if (params.containsKey("course")) {
       andClauses.add(cb.equal(
-          section.get("courseNumber"),
+          section.get("course"),
           (Course) params.get("course"))
       );
     }
     if (params.containsKey("professor")) {
       andClauses.add(cb.equal(
-          section.get("professorId"),
+          section.get("professor"),
           (Professor) params.get("professor"))
       );
     }
@@ -112,7 +113,7 @@ public class SearchServiceImpl implements SearchService {
       }
 
       if (!orClauses.isEmpty()) {
-        andClauses.add(cb.equal(day.get("courseSectionId"), section));
+        andClauses.add(cb.equal(day.get("courseSection"), section));
       }
     }
 
