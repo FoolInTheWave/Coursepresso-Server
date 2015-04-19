@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MeetingDayRepository extends CrudRepository<MeetingDay, Integer> {
-  
+
   @Modifying
   @Query("delete from MeetingDay d where d.id = (:id)")
   @Override

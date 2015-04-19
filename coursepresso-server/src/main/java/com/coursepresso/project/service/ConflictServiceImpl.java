@@ -53,8 +53,8 @@ public class ConflictServiceImpl implements ConflictService {
                  (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
                 conflicts.add(
-                    meetingDay.getCourseSectionId().toString() + "#" + 
-                    meetingDayToCompare.getCourseSectionId().toString()
+                    meetingDay.getCourseSection().toString() + "#" + 
+                    meetingDayToCompare.getCourseSection().toString()
                 );
 
               }
