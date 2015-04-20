@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.coursepresso.project.service;
 
 import com.coursepresso.project.entity.CourseSection;
@@ -16,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Steve
+ * @author Steve Foco
  */
 @Service
 public class CopyScheduleServiceImpl implements CopyScheduleService {
   
   private static final Logger log = LoggerFactory.getLogger(
-      SecurityServiceImpl.class
+      CopyScheduleServiceImpl.class
   );
   
   @Inject
@@ -34,7 +29,7 @@ public class CopyScheduleServiceImpl implements CopyScheduleService {
   public void copySchedule(Term prevTerm, Term newTerm) {
     log.info("TEST 1");
     
-    for(CourseSection section : prevTerm.getCourseSectionList()) {
+    for (CourseSection section : prevTerm.getCourseSectionList()) {
       section.setId(null);
       section.setTerm(newTerm);
       newSections.add(section);

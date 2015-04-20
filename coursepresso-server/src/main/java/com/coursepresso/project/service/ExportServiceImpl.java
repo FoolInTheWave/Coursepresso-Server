@@ -3,6 +3,7 @@ package com.coursepresso.project.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -56,17 +57,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getInt("id"));
-        sb.append(';');
-        sb.append(rs.getString("type"));
-        sb.append(';');
-        sb.append(rs.getString("room_number"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -87,17 +81,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getInt("id"));
-        sb.append(';');
-        sb.append(rs.getString("username"));
-        sb.append(';');
-        sb.append(rs.getString("authority"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -118,17 +105,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getInt("id"));
-        sb.append(';');
-        sb.append(rs.getString("course_number"));
-        sb.append(';');
-        sb.append(rs.getString("prerequisite"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -151,39 +131,10 @@ public class ExportServiceImpl implements ExportService {
       );
       pstmt.setString(1, term + "%");
       ResultSet rs = pstmt.executeQuery();
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getInt("id"));
-        sb.append(';');
-        sb.append(rs.getString("course_number"));
-        sb.append(';');
-        sb.append(rs.getInt("section_number"));
-        sb.append(';');
-        sb.append(rs.getBoolean("available"));
-        sb.append(';');
-        sb.append(rs.getInt("capacity"));
-        sb.append(';');
-        sb.append(rs.getInt("seats_available"));
-        sb.append(';');
-        sb.append(rs.getString("status"));
-        sb.append(';');
-        sb.append(rs.getString("term"));
-        sb.append(';');
-        sb.append(rs.getInt("student_count"));
-        sb.append(';');
-        sb.append(rs.getString("type"));
-        sb.append(';');
-        sb.append(rs.getDate("start_date"));
-        sb.append(';');
-        sb.append(rs.getDate("end_date"));
-        sb.append(';');
-        sb.append(rs.getString("department"));
-        sb.append(';');
-        sb.append(rs.getInt("professor_id"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -204,23 +155,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getString("course_number"));
-        sb.append(';');
-        sb.append(rs.getString("department"));
-        sb.append(';');
-        sb.append(rs.getString("title"));
-        sb.append(';');
-        sb.append(rs.getInt("credits"));
-        sb.append(';');
-        sb.append(rs.getString("description"));
-        sb.append(';');
-        sb.append(rs.getString("academic_level"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -241,15 +179,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getString("name"));
-        sb.append(';');
-        sb.append(rs.getString("abbreviation"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -270,13 +203,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getLong("group_id"));
-        sb.append(';');
-        sb.append(rs.getString("authority"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -297,15 +227,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getLong("id"));
-        sb.append(';');
-        sb.append(rs.getString("username"));
-        sb.append(';');
-        sb.append(rs.getLong("group_id"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -326,13 +251,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getLong("id"));
-        sb.append(';');
-        sb.append(rs.getString("group_name"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -355,25 +277,10 @@ public class ExportServiceImpl implements ExportService {
       );
       pstmt.setString(1, term + "%");
       ResultSet rs = pstmt.executeQuery();
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getInt("id"));
-        sb.append(';');
-        sb.append(rs.getInt("course_section_id"));
-        sb.append(';');
-        sb.append(rs.getString("room_number"));
-        sb.append(';');
-        sb.append(rs.getString("day"));
-        sb.append(';');
-        sb.append(rs.getTime("start_time"));
-        sb.append(';');
-        sb.append(rs.getTime("end_time"));
-        sb.append(';');
-        sb.append(rs.getString("term"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -394,19 +301,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getInt("id"));
-        sb.append(';');
-        sb.append(rs.getString("first_name"));
-        sb.append(';');
-        sb.append(rs.getString("last_name"));
-        sb.append(';');
-        sb.append(rs.getString("department"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -427,19 +325,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getString("room_number"));
-        sb.append(';');
-        sb.append(rs.getString("building"));
-        sb.append(';');
-        sb.append(rs.getInt("capacity"));
-        sb.append(';');
-        sb.append(rs.getString("type"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -460,15 +349,10 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getString("term"));
-        sb.append(';');
-        sb.append(rs.getString("status"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
@@ -489,31 +373,46 @@ public class ExportServiceImpl implements ExportService {
       Connection conn = dataSource.getConnection();
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
+      ResultSetMetaData rsmd = rs.getMetaData();
 
-      while (rs.next()) {
-        sb.append(rs.getString("username"));
-        sb.append(';');
-        sb.append(rs.getString("password"));
-        sb.append(';');
-        sb.append(rs.getString("firstname"));
-        sb.append(';');
-        sb.append(rs.getString("lastname"));
-        sb.append(';');
-        sb.append(rs.getString("email"));
-        sb.append(';');
-        sb.append(rs.getBoolean("enabled"));
-        sb.append(';');
-        sb.append(rs.getString("department"));
-        sb.append(';');
-        sb.append(rs.getTimestamp("updated_at"));
-        sb.append('\n');
-      }
+      sb.append(getDelimitedColumns(rsmd, rsmd.getColumnCount()));
+      sb.append(getDelimitedRows(rs, rsmd.getColumnCount()));
 
       conn.close();
 
       log.debug("User CSV file created successfully");
     } catch (Exception e) {
       log.error("User CSV file creation failed: ", e);
+    }
+
+    return sb.toString();
+  }
+
+  public String getDelimitedColumns(ResultSetMetaData rsmd, int numColumns)
+      throws SQLException {
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 1; i <= numColumns; i++) {
+      sb.append(rsmd.getColumnName(i));
+      sb.append(';');
+    }
+    sb.setLength(sb.length() - 1);
+    sb.append('\n');
+
+    return sb.toString();
+  }
+
+  public String getDelimitedRows(ResultSet rs, int numColumns)
+      throws SQLException {
+    StringBuilder sb = new StringBuilder();
+
+    while (rs.next()) {
+      for (int i = 1; i <= numColumns; i++) {
+        sb.append(rs.getString(i));
+        sb.append(';');
+      }
+      sb.setLength(sb.length() - 1);
+      sb.append('\n');
     }
 
     return sb.toString();
