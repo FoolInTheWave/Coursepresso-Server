@@ -11,5 +11,4 @@ import java.util.Map;
 public interface SearchService {
   
   List<CourseSection> searchSections(Map<String, Object> params);
-  
 }

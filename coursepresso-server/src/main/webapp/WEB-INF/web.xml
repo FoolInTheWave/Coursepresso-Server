@@ -116,10 +116,31 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>15</load-on-startup>
   </servlet>
+  
+  <servlet>
+    <servlet-name>export</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>16</load-on-startup>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>security</servlet-name>
     <url-pattern>/security.service/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search.service/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>conflict</servlet-name>
+    <url-pattern>/conflict.service/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>export</servlet-name>
+    <url-pattern>/export.service/*</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
@@ -170,16 +191,6 @@
   <servlet-mapping>
     <servlet-name>term</servlet-name>
     <url-pattern>/term.repository/*</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>search</servlet-name>
-    <url-pattern>/search.service/*</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>conflict</servlet-name>
-    <url-pattern>/conflict.service/*</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
