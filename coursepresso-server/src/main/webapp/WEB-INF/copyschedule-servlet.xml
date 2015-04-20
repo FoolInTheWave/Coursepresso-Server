@@ -6,7 +6,7 @@
                http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <bean name="/copyschedule.service" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-    <property name="service" ref="copyScheduleImpl"/>
+    <property name="service" ref="copyScheduleServiceImpl"/>
     <property name="serviceInterface" value="com.coursepresso.project.service.CopyScheduleService"/>
   </bean>
 
