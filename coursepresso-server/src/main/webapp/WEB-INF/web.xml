@@ -4,225 +4,236 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/coursepresso.xml</param-value>
-    </context-param>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/coursepresso.xml</param-value>
+  </context-param>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
 
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
   
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
-    <servlet>
-        <servlet-name>security</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>security</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>appliance</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>appliance</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>course-prerequisite</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>3</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>course-prerequisite</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>course</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>4</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>course</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>course-section</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>5</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>course-section</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>department</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>6</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>department</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>6</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>meeting-day</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>7</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>meeting-day</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>7</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>meeting-time</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>8</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>meeting-time</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>8</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>professor</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>9</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>professor</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>9</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>room</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>10</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>room</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>10</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>term</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>11</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>term</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>11</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>search</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>12</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>12</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>conflict</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>13</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>conflict</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>13</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>authority</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>14</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>authority</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>14</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>user</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>15</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>user</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>15</load-on-startup>
+  </servlet>
   
-    <servlet>
-        <servlet-name>export</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>16</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>export</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>16</load-on-startup>
+  </servlet>
 
-    <servlet>
-        <servlet-name>copy-schedule</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>17</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>copy-schedule</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>17</load-on-startup>
+  </servlet>
     
-    <servlet>
-        <servlet-name>import-schedule</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>18</load-on-startup>
-    </servlet>
+  <servlet>
+    <servlet-name>import-schedule</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>18</load-on-startup>
+  </servlet>
     
-    <servlet-mapping>
-        <servlet-name>security</servlet-name>
-        <url-pattern>/security.service/*</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-        <servlet-name>search</servlet-name>
-        <url-pattern>/search.service/*</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-        <servlet-name>conflict</servlet-name>
-        <url-pattern>/conflict.service/*</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-        <servlet-name>export</servlet-name>
-        <url-pattern>/export.service/*</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-        <servlet-name>copy-schedule</servlet-name>
-        <url-pattern>/copy-schedule.service/*</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>import</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>19</load-on-startup>
+  </servlet>
     
-    <servlet-mapping>
-        <servlet-name>import-schedule</servlet-name>
-        <url-pattern>/import-schedule.service/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>security</servlet-name>
+    <url-pattern>/security.service/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>appliance</servlet-name>
-        <url-pattern>/appliance.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search.service/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>course-prerequisite</servlet-name>
-        <url-pattern>/course-prerequisite.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>conflict</servlet-name>
+    <url-pattern>/conflict.service/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>course</servlet-name>
-        <url-pattern>/course.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>export</servlet-name>
+    <url-pattern>/export.service/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>course-section</servlet-name>
-        <url-pattern>/course-section.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>import</servlet-name>
+    <url-pattern>/import.service/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>department</servlet-name>
-        <url-pattern>/department.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>copy-schedule</servlet-name>
+    <url-pattern>/copy-schedule.service/*</url-pattern>
+  </servlet-mapping>
+    
+  <servlet-mapping>
+    <servlet-name>import-schedule</servlet-name>
+    <url-pattern>/import-schedule.service/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>meeting-day</servlet-name>
-        <url-pattern>/meeting-day.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>appliance</servlet-name>
+    <url-pattern>/appliance.repository/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>meeting-time</servlet-name>
-        <url-pattern>/meeting-time.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>course-prerequisite</servlet-name>
+    <url-pattern>/course-prerequisite.repository/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>professor</servlet-name>
-        <url-pattern>/professor.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>course</servlet-name>
+    <url-pattern>/course.repository/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>room</servlet-name>
-        <url-pattern>/room.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>course-section</servlet-name>
+    <url-pattern>/course-section.repository/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>term</servlet-name>
-        <url-pattern>/term.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>department</servlet-name>
+    <url-pattern>/department.repository/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>authority</servlet-name>
-        <url-pattern>/authority.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>meeting-day</servlet-name>
+    <url-pattern>/meeting-day.repository/*</url-pattern>
+  </servlet-mapping>
   
-    <servlet-mapping>
-        <servlet-name>user</servlet-name>
-        <url-pattern>/user.repository/*</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>meeting-time</servlet-name>
+    <url-pattern>/meeting-time.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>professor</servlet-name>
+    <url-pattern>/professor.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>room</servlet-name>
+    <url-pattern>/room.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>term</servlet-name>
+    <url-pattern>/term.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>authority</servlet-name>
+    <url-pattern>/authority.repository/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/user.repository/*</url-pattern>
+  </servlet-mapping>
 
 </web-app>
