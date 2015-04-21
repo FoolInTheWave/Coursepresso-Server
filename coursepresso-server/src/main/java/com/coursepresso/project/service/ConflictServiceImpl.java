@@ -1,5 +1,6 @@
 package com.coursepresso.project.service;
 
+import com.coursepresso.project.entity.Conflict;
 import com.coursepresso.project.entity.MeetingDay;
 import com.coursepresso.project.entity.Room;
 import com.coursepresso.project.entity.Term;
@@ -16,54 +17,57 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Caleb Miller, Steve Foco
+ * @author Steve Foco, Caleb Miller
  */
 @Service
 public class ConflictServiceImpl implements ConflictService {
-  
+
   private static final Logger log = LoggerFactory.getLogger(
       ConflictServiceImpl.class
   );
-    
+
   @Inject
   private RoomRepository roomRepository;
-  
-  private List<Room> rooms = new ArrayList<>();;
-  private List<MeetingDay> meetingDays = new ArrayList<>();;
-  private Set<String> conflicts = new HashSet<>();
-  
+
+  private List<Room> rooms = new ArrayList<>();
+  private List<MeetingDay> meetingDays = new ArrayList<>();
+
   @Override
-  public List<String> getConflicts(Term term) {
-       
+  public List<Conflict> getConflicts(Term term) {
+    Set<Conflict> conflicts = new HashSet<>();
     rooms = roomRepository.getRoomsWithMeetingDays();
-    
-    for(Room room : rooms) {
-      if(room.getRoomNumber().equals("A105") || room.getRoomNumber().equals("A102")) {
+
+    for (Room room : rooms) {
+      if (room.getRoomNumber().equals("A105") || room.getRoomNumber().equals("A102")) {
 
         meetingDays = room.getMeetingDayList();
-        
-        for(MeetingDay meetingDay : meetingDays) {
-                      
-          for(MeetingDay meetingDayToCompare : meetingDays) {
 
-            if(!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
+        for (MeetingDay meetingDay : meetingDays) {
 
-              if((meetingDayToCompare.getDay().equals(meetingDay.getDay())) &&
-                 (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime())) && 
-                 (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+          for (MeetingDay meetingDayToCompare : meetingDays) {
 
-                conflicts.add(
-                    meetingDay.getCourseSection().toString() + "#" + 
-                    meetingDayToCompare.getCourseSection().toString()
-                );
+            if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
+              if ((meetingDayToCompare.getDay().equals(meetingDay.getDay()))
+                  && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
+                  && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+
+                // Clear meeting day list to avoid stack overflow on client
+                meetingDay.getCourseSection().setMeetingDayList(null);
+
+                // Build conflict object and add it to conflicts collection
+                conflicts.add(new Conflict(
+                    meetingDay.getCourseSection(),
+                    "Conflicts with line #: "
+                    + meetingDayToCompare.getCourseSection().getId()
+                ));
               }
             }
           }
         }
       }
     }
-    
+
     return new ArrayList<>(conflicts);
   }
 }
