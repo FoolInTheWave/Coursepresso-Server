@@ -1,6 +1,7 @@
 package com.coursepresso.project.service;
 
 import com.coursepresso.project.entity.CourseSection;
+import com.coursepresso.project.entity.MeetingDay;
 import com.coursepresso.project.entity.Term;
 import com.coursepresso.project.repository.CourseSectionRepository;
 import java.util.ArrayList;
@@ -28,13 +29,20 @@ public class CopyScheduleServiceImpl implements CopyScheduleService {
   @Override
   public void copySchedule(Term prevTerm, Term newTerm) {
     log.info("TEST 1");
+    newSections = new ArrayList<>();
     
-    for (CourseSection section : prevTerm.getCourseSectionList()) {
+    for(CourseSection section : prevTerm.getCourseSectionList()) {
+      
+      for(MeetingDay day : section.getMeetingDayList()) {
+        day.setId(null);
+      }
+      
       section.setId(null);
       section.setTerm(newTerm);
       newSections.add(section);
     }
     
     courseSectionRepository.save(newSections);
+    
   }
 }
