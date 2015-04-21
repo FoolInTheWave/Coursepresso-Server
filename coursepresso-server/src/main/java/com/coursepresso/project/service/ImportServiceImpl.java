@@ -2,7 +2,6 @@ package com.coursepresso.project.service;
 
 import com.coursepresso.project.entity.*;
 import com.coursepresso.project.repository.*;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
