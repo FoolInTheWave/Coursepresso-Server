@@ -16,33 +16,32 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CopyScheduleServiceImpl implements CopyScheduleService {
-  
+
   private static final Logger log = LoggerFactory.getLogger(
       CopyScheduleServiceImpl.class
   );
-  
+
   @Inject
   private CourseSectionRepository courseSectionRepository;
-  
+
   private ArrayList<CourseSection> newSections;
-  
+
   @Override
   public void copySchedule(Term prevTerm, Term newTerm) {
     log.info("TEST 1");
     newSections = new ArrayList<>();
-    
-    for(CourseSection section : prevTerm.getCourseSectionList()) {
-      
-      for(MeetingDay day : section.getMeetingDayList()) {
+
+    for (CourseSection section : prevTerm.getCourseSectionList()) {
+
+      for (MeetingDay day : section.getMeetingDayList()) {
         day.setId(null);
       }
-      
+
       section.setId(null);
       section.setTerm(newTerm);
       newSections.add(section);
     }
-    
+
     courseSectionRepository.save(newSections);
-    
   }
 }
