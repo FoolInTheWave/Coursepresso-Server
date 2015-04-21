@@ -2,6 +2,7 @@ package com.coursepresso.project.service;
 
 import com.coursepresso.project.entity.*;
 import com.coursepresso.project.repository.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -37,10 +38,8 @@ public class ImportServiceImpl implements ImportService {
       section.setProfessor(professorRepository.findOne(
           section.getProfessor().getId())
       );
-      section.setTerm(termRepository.findOne(
-          section.getTerm().getTerm())
-      );
     }
+    
     // Save courses to database using repository
     courseSectionRepository.save(courseSections);
   }
