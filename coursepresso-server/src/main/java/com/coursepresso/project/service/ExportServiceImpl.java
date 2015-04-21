@@ -21,12 +21,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExportServiceImpl implements ExportService {
 
+  @Inject
+  private DriverManagerDataSource dataSource;
+
   private static final Logger log = LoggerFactory.getLogger(
       ExportServiceImpl.class
   );
-
-  @Inject
-  private DriverManagerDataSource dataSource;
 
   @Override
   public List<String> getTableNames() {

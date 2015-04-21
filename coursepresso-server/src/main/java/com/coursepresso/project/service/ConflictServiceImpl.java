@@ -22,15 +22,15 @@ import org.slf4j.LoggerFactory;
 @Service
 public class ConflictServiceImpl implements ConflictService {
 
-  private static final Logger log = LoggerFactory.getLogger(
-      ConflictServiceImpl.class
-  );
-
   @Inject
   private RoomRepository roomRepository;
 
   private List<Room> rooms = new ArrayList<>();
   private List<MeetingDay> meetingDays = new ArrayList<>();
+
+  private static final Logger log = LoggerFactory.getLogger(
+      ConflictServiceImpl.class
+  );
 
   @Override
   public List<Conflict> getConflicts(Term term) {

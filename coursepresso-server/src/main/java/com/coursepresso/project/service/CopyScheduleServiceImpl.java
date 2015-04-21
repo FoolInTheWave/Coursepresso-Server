@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class CopyScheduleServiceImpl implements CopyScheduleService {
 
-  private static final Logger log = LoggerFactory.getLogger(
-      CopyScheduleServiceImpl.class
-  );
-
   @Inject
   private CourseSectionRepository courseSectionRepository;
 
   private ArrayList<CourseSection> newSections;
+
+  private static final Logger log = LoggerFactory.getLogger(
+      CopyScheduleServiceImpl.class
+  );
 
   @Override
   public void copySchedule(Term prevTerm, Term newTerm) {

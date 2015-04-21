@@ -24,10 +24,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImportScheduleServiceImpl implements ImportScheduleService {
 
-  private static final org.slf4j.Logger log = LoggerFactory.getLogger(
-          ImportScheduleServiceImpl.class
-  );
-
   @Inject
   private TermRepository termRepository;
   @Inject
@@ -42,6 +38,10 @@ public class ImportScheduleServiceImpl implements ImportScheduleService {
   private MeetingDayRepository meetingDayRepository;
   @Inject
   private RoomRepository roomRepository;
+
+  private static final org.slf4j.Logger log = LoggerFactory.getLogger(
+      ImportScheduleServiceImpl.class
+  );
 
   @Override
   public void importSchedule(Term term, String line) {
@@ -59,7 +59,7 @@ public class ImportScheduleServiceImpl implements ImportScheduleService {
 
       String[] courseNum = column[0].split("\\*");
       courseSection.setCourse(
-              courseRepository.findByCourseNumber(courseNum[0] + courseNum[1])
+          courseRepository.findByCourseNumber(courseNum[0] + courseNum[1])
       );
 
       courseSection.setSectionNumber(Integer.parseInt(column[4]));
@@ -76,11 +76,11 @@ public class ImportScheduleServiceImpl implements ImportScheduleService {
       courseSection.setEndDate(formatter.parse(column[11]));
 
       courseSection.setDepartment(
-              departmentRepository.findByAbbreviation(courseNum[0])
+          departmentRepository.findByAbbreviation(courseNum[0])
       );
 
       courseSection.setProfessor(
-              professorRepository.findById(Integer.parseInt(column[1]))
+          professorRepository.findById(Integer.parseInt(column[1]))
       );
 
       log.info(courseNum[0] + courseNum[1]);
@@ -102,7 +102,7 @@ public class ImportScheduleServiceImpl implements ImportScheduleService {
 
         String[] rooms = column[9].split(";");
         day.setRoom(
-                roomRepository.findOne(rooms[0])
+            roomRepository.findOne(rooms[0])
         );
 
         // Save MeetingDays for CourseSection

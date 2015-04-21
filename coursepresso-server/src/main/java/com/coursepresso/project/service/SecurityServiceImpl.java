@@ -15,16 +15,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
-  private static final Logger log = LoggerFactory.getLogger(
-      SecurityServiceImpl.class
-  );
-
   @Inject
   private AuthenticationManager authenticationManager;
   @Inject
   private JdbcUserDetailsManager jdbcUserDetailsManager;
   @Inject
   private HttpServletRequest request;
+
+  private static final Logger log = LoggerFactory.getLogger(
+      SecurityServiceImpl.class
+  );
 
   @Override
   public void login(String username, String password) {
@@ -60,22 +60,22 @@ public class SecurityServiceImpl implements SecurityService {
 
     log.debug("User '{}' successfully logged out", authentication.getName());
   }
-  
+
   @Override
   public void createUser(UserDetails user) {
     log.info("Creating new user '{}'", user.getUsername());
-    
+
     jdbcUserDetailsManager.createUser(user);
-    
+
     log.debug("User '{}' successfully created", user.getUsername());
   }
-  
+
   @Override
   public String getAuthority() {
-    
+
     return SecurityContextHolder.getContext().
-            getAuthentication().getAuthorities().toString();
-    
+        getAuthentication().getAuthorities().toString();
+
   }
-  
+
 }

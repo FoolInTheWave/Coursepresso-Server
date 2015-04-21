@@ -23,12 +23,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchServiceImpl implements SearchService {
 
+  @PersistenceContext
+  private EntityManager entityManager;
+
   private static final Logger log = LoggerFactory.getLogger(
       SearchServiceImpl.class
   );
-
-  @PersistenceContext
-  private EntityManager entityManager;
 
   @Override
   @Transactional
