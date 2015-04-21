@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.coursepresso.project.service;
 
 import com.coursepresso.project.entity.CourseSection;
@@ -18,15 +13,15 @@ import com.coursepresso.project.repository.TermRepository;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Steve
+ * @author Steve Foco
  */
+@Service
 public class ImportScheduleServiceImpl implements ImportScheduleService {
 
   private static final org.slf4j.Logger log = LoggerFactory.getLogger(

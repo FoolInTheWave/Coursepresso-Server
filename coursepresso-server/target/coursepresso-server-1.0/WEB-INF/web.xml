@@ -124,13 +124,13 @@
     </servlet>
 
     <servlet>
-        <servlet-name>copyschedule</servlet-name>
+        <servlet-name>copy-schedule</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>17</load-on-startup>
     </servlet>
     
     <servlet>
-        <servlet-name>importschedule</servlet-name>
+        <servlet-name>import-schedule</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>18</load-on-startup>
     </servlet>
@@ -156,13 +156,13 @@
     </servlet-mapping>
   
     <servlet-mapping>
-        <servlet-name>copyschedule</servlet-name>
-        <url-pattern>/copyschedule.service/*</url-pattern>
+        <servlet-name>copy-schedule</servlet-name>
+        <url-pattern>/copy-schedule.service/*</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>importschedule</servlet-name>
-        <url-pattern>/importschedule.service/*</url-pattern>
+        <servlet-name>import-schedule</servlet-name>
+        <url-pattern>/import-schedule.service/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
