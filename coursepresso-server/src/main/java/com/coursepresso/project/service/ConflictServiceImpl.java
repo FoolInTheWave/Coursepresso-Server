@@ -37,7 +37,7 @@ public class ConflictServiceImpl implements ConflictService {
   private List<MeetingDay> professorMeetingDays = new ArrayList<>();
 
   private static final Logger log = LoggerFactory.getLogger(
-          ConflictServiceImpl.class
+      ConflictServiceImpl.class
   );
 
   @Override
@@ -58,19 +58,19 @@ public class ConflictServiceImpl implements ConflictService {
             if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
               if ((meetingDayToCompare.getTerm().getTerm().equals(term.getTerm()))
-                      && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
-                      && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
-                      && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+                  && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
+                  && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
+                  && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
                 // Clear meeting day list to avoid stack overflow on client
                 meetingDay.getCourseSection().setMeetingDayList(null);
 
                 // Build conflict object and add it to conflicts collection
                 conflicts.add(new Conflict(
-                        meetingDay.getCourseSection(),
-                        "Conflicts with line #: "
-                        + meetingDayToCompare.getCourseSection().getId()
-                        + " Room"
+                    meetingDay.getCourseSection(),
+                    "Conflicts with line #: "
+                    + meetingDayToCompare.getCourseSection().getId()
+                    + " Room"
                 ));
               }
             }
@@ -104,18 +104,19 @@ public class ConflictServiceImpl implements ConflictService {
             if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
               if ((meetingDayToCompare.getTerm().getTerm().equals(term.getTerm()))
-                      && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
-                      && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
-                      && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+                  && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
+                  && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
+                  && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
                 // Clear meeting day list to avoid stack overflow on client
-                //meetingDay.getCourseSection().setMeetingDayList(null);
+                meetingDay.getCourseSection().setMeetingDayList(null);
+                
                 // Build conflict object and add it to conflicts collection
                 conflicts.add(new Conflict(
-                        meetingDay.getCourseSection(),
-                        "Conflicts with line #: "
-                        + meetingDayToCompare.getCourseSection().getId()
-                        + " Professor"
+                    meetingDay.getCourseSection(),
+                    "Conflicts with line #: "
+                    + meetingDayToCompare.getCourseSection().getId()
+                    + " Professor"
                 ));
               }
             }
