@@ -82,25 +82,25 @@ public class ConflictServiceImpl implements ConflictService {
     for (Professor professor : professors) {
       professor.getCourseSectionList().size();
     }
-    
+
     List<MeetingDay> professorMeetingDays = new ArrayList<>();
 
     for (Professor professor : professors) {
       professorMeetingDays.clear();
-      
+
       // Get list of meeting days for the professor
       for (CourseSection courseSection : professor.getCourseSectionList()) {
-        
-        for (MeetingDay day : courseSection.getMeetingDayList()) {
-          System.out.println(day.getId().toString() + day.getCourseSection() + day.getRoom());
+
+        if (courseSection.getMeetingDayList() == null) {
+          courseSection.setMeetingDayList(new ArrayList<>());
         }
-        
+
         for (MeetingDay day : courseSection.getMeetingDayList()) {
           day = meetingDayRepository.findOne(day.getId());
           // Initialize lazy loaded objects
           day.getRoom().getRoomNumber();
           day.setCourseSection(courseSection);
-          
+
           if (day.getTerm().equals(term)) {
             professorMeetingDays.add(day);
           }
