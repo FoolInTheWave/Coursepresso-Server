@@ -170,11 +170,6 @@
     <servlet-name>copy-schedule</servlet-name>
     <url-pattern>/copy-schedule.service/*</url-pattern>
   </servlet-mapping>
-    
-  <servlet-mapping>
-    <servlet-name>import-schedule</servlet-name>
-    <url-pattern>/import-schedule.service/*</url-pattern>
-  </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>appliance</servlet-name>
