@@ -38,30 +38,28 @@ public class ConflictServiceImpl implements ConflictService {
     rooms = roomRepository.getRoomsWithMeetingDays();
 
     for (Room room : rooms) {
-      if (room.getRoomNumber().equals("A105") || room.getRoomNumber().equals("A102")) {
 
-        meetingDays = room.getMeetingDayList();
+      meetingDays = room.getMeetingDayList();
 
-        for (MeetingDay meetingDay : meetingDays) {
+      for (MeetingDay meetingDay : meetingDays) {
 
-          for (MeetingDay meetingDayToCompare : meetingDays) {
+        for (MeetingDay meetingDayToCompare : meetingDays) {
 
-            if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
+          if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
-              if ((meetingDayToCompare.getDay().equals(meetingDay.getDay()))
-                  && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
-                  && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+            if ((meetingDayToCompare.getDay().equals(meetingDay.getDay()))
+                && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
+                && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
-                // Clear meeting day list to avoid stack overflow on client
-                meetingDay.getCourseSection().setMeetingDayList(null);
+              // Clear meeting day list to avoid stack overflow on client
+              meetingDay.getCourseSection().setMeetingDayList(null);
 
-                // Build conflict object and add it to conflicts collection
-                conflicts.add(new Conflict(
-                    meetingDay.getCourseSection(),
-                    "Conflicts with line #: "
-                    + meetingDayToCompare.getCourseSection().getId()
-                ));
-              }
+              // Build conflict object and add it to conflicts collection
+              conflicts.add(new Conflict(
+                  meetingDay.getCourseSection(),
+                  "Conflicts with line #: "
+                  + meetingDayToCompare.getCourseSection().getId()
+              ));
             }
           }
         }
