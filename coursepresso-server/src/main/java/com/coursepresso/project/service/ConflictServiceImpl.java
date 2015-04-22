@@ -51,24 +51,28 @@ public class ConflictServiceImpl implements ConflictService {
 
       for (MeetingDay meetingDay : meetingDays) {
 
-        for (MeetingDay meetingDayToCompare : meetingDays) {
+        if (meetingDay.getTerm().getTerm().equals(term.getTerm())) {
 
-          if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
+          for (MeetingDay meetingDayToCompare : meetingDays) {
 
-            if ((meetingDayToCompare.getDay().equals(meetingDay.getDay()))
-                    && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
-                    && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+            if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
-              // Clear meeting day list to avoid stack overflow on client
-              meetingDay.getCourseSection().setMeetingDayList(null);
+              if ((meetingDayToCompare.getTerm().getTerm().equals(term.getTerm()))
+                      && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
+                      && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
+                      && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
-              // Build conflict object and add it to conflicts collection
-              conflicts.add(new Conflict(
-                      meetingDay.getCourseSection(),
-                      "Conflicts with line #: "
-                      + meetingDayToCompare.getCourseSection().getId()
-                      + " Room"
-              ));
+                // Clear meeting day list to avoid stack overflow on client
+                meetingDay.getCourseSection().setMeetingDayList(null);
+
+                // Build conflict object and add it to conflicts collection
+                conflicts.add(new Conflict(
+                        meetingDay.getCourseSection(),
+                        "Conflicts with line #: "
+                        + meetingDayToCompare.getCourseSection().getId()
+                        + " Room"
+                ));
+              }
             }
           }
         }
@@ -85,25 +89,27 @@ public class ConflictServiceImpl implements ConflictService {
 
       for (CourseSection courseSection : courseSections) {
         meetingDays = courseSection.getMeetingDayList();
-        
-        for(MeetingDay md : meetingDays) {
+
+        for (MeetingDay md : meetingDays) {
           professorMeetingDays.add(md);
         }
       }
-        
-        for (MeetingDay meetingDay : professorMeetingDays) {
+
+      for (MeetingDay meetingDay : professorMeetingDays) {
+
+        if (meetingDay.getTerm().getTerm().equals(term.getTerm())) {
 
           for (MeetingDay meetingDayToCompare : professorMeetingDays) {
 
             if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
 
-              if ((meetingDayToCompare.getDay().equals(meetingDay.getDay()))
+              if ((meetingDayToCompare.getTerm().getTerm().equals(term.getTerm()))
+                      && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
                       && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
                       && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
 
                 // Clear meeting day list to avoid stack overflow on client
                 //meetingDay.getCourseSection().setMeetingDayList(null);
-
                 // Build conflict object and add it to conflicts collection
                 conflicts.add(new Conflict(
                         meetingDay.getCourseSection(),
@@ -115,6 +121,7 @@ public class ConflictServiceImpl implements ConflictService {
             }
           }
         }
+      }
     }
 
     return new ArrayList<>(conflicts);
