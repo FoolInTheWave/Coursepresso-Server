@@ -70,75 +70,69 @@
   </servlet>
   
   <servlet>
-    <servlet-name>meeting-time</servlet-name>
+    <servlet-name>professor</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>8</load-on-startup>
   </servlet>
   
   <servlet>
-    <servlet-name>professor</servlet-name>
+    <servlet-name>room</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>9</load-on-startup>
   </servlet>
   
   <servlet>
-    <servlet-name>room</servlet-name>
+    <servlet-name>term</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>10</load-on-startup>
   </servlet>
   
   <servlet>
-    <servlet-name>term</servlet-name>
+    <servlet-name>search</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>11</load-on-startup>
   </servlet>
   
   <servlet>
-    <servlet-name>search</servlet-name>
+    <servlet-name>conflict</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>12</load-on-startup>
   </servlet>
   
   <servlet>
-    <servlet-name>conflict</servlet-name>
+    <servlet-name>authority</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>13</load-on-startup>
   </servlet>
   
   <servlet>
-    <servlet-name>authority</servlet-name>
+    <servlet-name>user</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>14</load-on-startup>
   </servlet>
   
   <servlet>
-    <servlet-name>user</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>15</load-on-startup>
-  </servlet>
-  
-  <servlet>
     <servlet-name>export</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>16</load-on-startup>
+    <load-on-startup>15</load-on-startup>
   </servlet>
 
   <servlet>
     <servlet-name>copy-schedule</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>17</load-on-startup>
+    <load-on-startup>16</load-on-startup>
   </servlet>
     
   <servlet>
     <servlet-name>import-schedule</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>18</load-on-startup>
+    <load-on-startup>17</load-on-startup>
   </servlet>
     
   <servlet>
     <servlet-name>import</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>19</load-on-startup>
+    <load-on-startup>18</load-on-startup>
   </servlet>
     
   <servlet-mapping>
@@ -199,11 +193,6 @@
   <servlet-mapping>
     <servlet-name>meeting-day</servlet-name>
     <url-pattern>/meeting-day.repository/*</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>meeting-time</servlet-name>
-    <url-pattern>/meeting-time.repository/*</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
