@@ -4,16 +4,17 @@ import com.coursepresso.project.entity.Conflict;
 import com.coursepresso.project.entity.CourseSection;
 import com.coursepresso.project.entity.MeetingDay;
 import com.coursepresso.project.entity.Professor;
-import com.coursepresso.project.entity.Room;
 import com.coursepresso.project.entity.Term;
+import com.coursepresso.project.repository.CourseSectionRepository;
+import com.coursepresso.project.repository.MeetingDayRepository;
 import com.coursepresso.project.repository.ProfessorRepository;
-import com.coursepresso.project.repository.RoomRepository;
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,105 +27,115 @@ import org.slf4j.LoggerFactory;
 public class ConflictServiceImpl implements ConflictService {
 
   @Inject
-  private RoomRepository roomRepository;
+  private CourseSectionRepository courseSectionRepository;
+  @Inject
+  private MeetingDayRepository meetingDayRepository;
   @Inject
   private ProfessorRepository professorRepository;
-
-  private List<Room> rooms = new ArrayList<>();
-  private List<Professor> professors = new ArrayList<>();
-  private List<CourseSection> courseSections = new ArrayList<>();
-  private List<MeetingDay> meetingDays = new ArrayList<>();
-  private List<MeetingDay> professorMeetingDays = new ArrayList<>();
 
   private static final Logger log = LoggerFactory.getLogger(
       ConflictServiceImpl.class
   );
 
   @Override
+  @Transactional
   public List<Conflict> getConflicts(Term term) {
     Set<Conflict> conflicts = new HashSet<>();
-    rooms = roomRepository.getRoomsWithMeetingDays();
+    List<MeetingDay> meetingDays = meetingDayRepository.findAllByTermWithRoom(term);
 
-    for (Room room : rooms) {
+    // Initialize each course section object
+    for (MeetingDay day : meetingDays) {
+      day.getCourseSection().getId();
+    }
 
-      meetingDays = room.getMeetingDayList();
+    for (MeetingDay meetingDay : meetingDays) {
 
-      for (MeetingDay meetingDay : meetingDays) {
+      for (MeetingDay meetingDayToCompare : meetingDays) {
 
-        if (meetingDay.getTerm().getTerm().equals(term.getTerm())) {
+        if (!meetingDay.equals(meetingDayToCompare)) {
 
-          for (MeetingDay meetingDayToCompare : meetingDays) {
+          if (meetingDayToCompare.getRoom().equals(meetingDay.getRoom())
+              && meetingDayToCompare.getDay().equals(meetingDay.getDay())
+              && (meetingDayToCompare.getStartTime().before(
+                  meetingDay.getEndTime()))
+              && (meetingDayToCompare.getEndTime().after(
+                  meetingDay.getStartTime()
+              ))) {
 
-            if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
+            // Clear meeting day list to avoid stack overflow on client
+            meetingDay.getCourseSection().setMeetingDayList(null);
 
-              if ((meetingDayToCompare.getTerm().getTerm().equals(term.getTerm()))
-                  && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
-                  && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
-                  && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
-
-                // Clear meeting day list to avoid stack overflow on client
-                meetingDay.getCourseSection().setMeetingDayList(null);
-
-                // Build conflict object and add it to conflicts collection
-                conflicts.add(new Conflict(
-                    meetingDay.getCourseSection(),
-                    "Conflicts with line #: "
-                    + meetingDayToCompare.getCourseSection().getId()
-                    + " Room"
-                ));
-              }
-            }
+            // Build conflict object and add it to conflicts collection
+            conflicts.add(new Conflict(
+                meetingDay.getCourseSection(),
+                "Conflicts with line #: "
+                + meetingDayToCompare.getCourseSection().getId()
+                + " Room"
+            ));
           }
         }
       }
     }
 
-    professors = professorRepository.findAllWithCourseSections();
+    List<Professor> professors = Lists.newArrayList(professorRepository.findAll());
+    // Initialize each course section list
+    for (Professor professor : professors) {
+      professor.getCourseSectionList().size();
+    }
+    
+    List<MeetingDay> professorMeetingDays = new ArrayList<>();
 
     for (Professor professor : professors) {
-
-      courseSections.clear();
       professorMeetingDays.clear();
-      courseSections = professor.getCourseSectionList();
-
-      for (CourseSection courseSection : courseSections) {
-        meetingDays = courseSection.getMeetingDayList();
-
-        for (MeetingDay md : meetingDays) {
-          professorMeetingDays.add(md);
+      
+      // Get list of meeting days for the professor
+      for (CourseSection courseSection : professor.getCourseSectionList()) {
+        
+        for (MeetingDay day : courseSection.getMeetingDayList()) {
+          System.out.println(day.getId().toString() + day.getCourseSection() + day.getRoom());
+        }
+        
+        for (MeetingDay day : courseSection.getMeetingDayList()) {
+          day = meetingDayRepository.findOne(day.getId());
+          // Initialize lazy loaded objects
+          day.getRoom().getRoomNumber();
+          day.setCourseSection(courseSection);
+          
+          if (day.getTerm().equals(term)) {
+            professorMeetingDays.add(day);
+          }
         }
       }
 
       for (MeetingDay meetingDay : professorMeetingDays) {
 
-        if (meetingDay.getTerm().getTerm().equals(term.getTerm())) {
+        for (MeetingDay meetingDayToCompare : professorMeetingDays) {
 
-          for (MeetingDay meetingDayToCompare : professorMeetingDays) {
+          if (!(meetingDay.equals(meetingDayToCompare))) {
 
-            if (!Objects.equals(meetingDay.getId(), meetingDayToCompare.getId())) {
+            if (meetingDayToCompare.getRoom().equals(meetingDay.getRoom())
+                && meetingDayToCompare.getDay().equals(meetingDay.getDay())
+                && (meetingDayToCompare.getStartTime().before(
+                    meetingDay.getEndTime()))
+                && (meetingDayToCompare.getEndTime().after(
+                    meetingDay.getStartTime()
+                ))) {
 
-              if ((meetingDayToCompare.getTerm().getTerm().equals(term.getTerm()))
-                  && (meetingDayToCompare.getDay().equals(meetingDay.getDay()))
-                  && (meetingDayToCompare.getStartTime().before(meetingDay.getEndTime()))
-                  && (meetingDayToCompare.getEndTime().after(meetingDay.getStartTime()))) {
+              // Clear meeting day list to avoid stack overflow on client
+              meetingDay.getCourseSection().setMeetingDayList(null);
 
-                // Clear meeting day list to avoid stack overflow on client
-                meetingDay.getCourseSection().setMeetingDayList(null);
-                
-                // Build conflict object and add it to conflicts collection
-                conflicts.add(new Conflict(
-                    meetingDay.getCourseSection(),
-                    "Conflicts with line #: "
-                    + meetingDayToCompare.getCourseSection().getId()
-                    + " Professor"
-                ));
-              }
+              // Build conflict object and add it to conflicts collection
+              conflicts.add(new Conflict(
+                  meetingDay.getCourseSection(),
+                  "Conflicts with line #: "
+                  + meetingDayToCompare.getCourseSection().getId()
+                  + " Professor"
+              ));
             }
           }
         }
       }
     }
-
     return new ArrayList<>(conflicts);
   }
 }
