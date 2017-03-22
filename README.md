@@ -19,4 +19,4 @@ Provides service implementations for the Coursepresso Client application.  This 
 
 The server URL in the Courspresso Client application is located in the createService() method in the ServiceConfig class, in the package 'com.coursepresso.project'.  Note that you need to change this URL only if you decide to run Coursepresso Server on your own Tomcat instance.
 
-To deploy this application on a Tomcat instance simply build the application in an IDE (Netbeans) and upload the WAR file found in the target file (coursepresso.war) to the Tomcat instance.  It’s that simple.
+To deploy this application on a Tomcat instance simply build the application in an IDE (i.e. Netbeans, Eclipse, IntelliJ) and upload the WAR file found in the target file (coursepresso.war) to the Tomcat instance.  It’s that simple.
